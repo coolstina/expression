@@ -1,3 +1,17 @@
+// Copyright 2021 helloshaohua <wu.shaohua@foxmail.com>;
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package expression
 
 import (
@@ -114,5 +128,63 @@ func TestIsTelephoneOfChina(t *testing.T) {
 	for _, grid := range grids {
 		actual := IsTelephoneOfChina(grid.telephone)
 		assert.Equal(t, grid.expected, actual)
+	}
+}
+
+func TestIsEmail(t *testing.T) {
+	grids := []struct {
+		email    string
+		expected bool
+	}{
+		{
+			email:    "wu.shaohua@foxmail.com",
+			expected: true,
+		},
+		{
+			email:    "a@tom.com",
+			expected: true,
+		},
+		{
+			email:    "a.b@tom.com",
+			expected: true,
+		},
+		{
+			email:    "a.helloshaohua@tom.com.cn",
+			expected: true,
+		},
+		{
+			email:    "a@foxmail.com",
+			expected: true,
+		},
+		{
+			email:    "wu.shaohua@foxmail.com",
+			expected: true,
+		},
+		{
+			email:    "wu-shaohua@foxmail.com",
+			expected: true,
+		},
+		{
+			email:    "wu_shaohua@foxmail.com",
+			expected: true,
+		},
+		{
+			email:    "hello.@foxmail.com",
+			expected: false,
+		},
+		{
+			email:    "hello.world....@foxmail.com",
+			expected: false,
+		},
+		{
+			email:    "helle..@foxmail.com",
+			expected: false,
+		},
+	}
+
+	for _, grid := range grids {
+		actual := IsEmail(grid.email)
+		assert.Equal(t, grid.expected, actual,
+			"want: %t, but got: %t, email: %+v\n", grid.expected, actual, grid.email)
 	}
 }
