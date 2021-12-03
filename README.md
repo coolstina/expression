@@ -1,4 +1,4 @@
-# 
+# expression
 
 Go regular expression wrapper.
 
