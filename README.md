@@ -5,7 +5,7 @@ Go regular expression wrapper.
 ## Installation
 
 ```shell script
-$ go get -u github.com/coolstina/expression
+go get -u github.com/coolstina/expression
 ```
 
 
