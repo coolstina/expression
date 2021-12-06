@@ -19,15 +19,21 @@ import (
 )
 
 var (
-	ipv4      = regexp.MustCompile(`^\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}$`)
-	cellphone = regexp.MustCompile(`^(\+86(-|\s)?)?1[3-9][0-9]{9}$`)
-	telephone = regexp.MustCompile(`^(\d{3,4}-)?[1-9][0-9]{4,8}$`)
-	email     = regexp.MustCompile(`^[a-zA-Z0-9]{1,20}(([._\-])?[a-zA-Z0-9]{1,20})*@[a-z0-9]+(\.?[a-z]+)+$`)
+	ipv4         = regexp.MustCompile(`^\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}$`)
+	internalIPv4 = regexp.MustCompile(`(^127\.)|(^10\.)|(^172\.(1[6-9]|2[0-9]|3[0-1])\.)|(^192\.168\.)`)
+	cellphone    = regexp.MustCompile(`^(\+86(-|\s)?)?1[3-9][0-9]{9}$`)
+	telephone    = regexp.MustCompile(`^(\d{3,4}-)?[1-9][0-9]{4,8}$`)
+	email        = regexp.MustCompile(`^[a-zA-Z0-9]{1,20}(([._\-])?[a-zA-Z0-9]{1,20})*@[a-z0-9]+(\.?[a-z]+)+$`)
 )
 
 // IsIPv4 regular expression is used to check whether the IP address is IPV4.
 func IsIPv4(str string) bool {
 	return ipv4.MatchString(str)
+}
+
+// IsInternalIPv4 Use a regular expression to check whether the ip address is ipv4.
+func IsInternalIPv4(str string) bool {
+	return internalIPv4.MatchString(str)
 }
 
 // IsCellphoneOfChina regular expression is used to check whether the telephone number is china.
