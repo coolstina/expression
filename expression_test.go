@@ -20,7 +20,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestIsIPv4(t *testing.T) {
+func Test_IsIPv4(t *testing.T) {
 	grids := []struct {
 		ip       string
 		expected bool
@@ -41,7 +41,7 @@ func TestIsIPv4(t *testing.T) {
 	}
 }
 
-func TestIsCellphoneOfChina(t *testing.T) {
+func Test_IsCellphoneOfChina(t *testing.T) {
 	grids := []struct {
 		cellphone string
 		expected  bool
@@ -86,7 +86,7 @@ func TestIsCellphoneOfChina(t *testing.T) {
 	}
 }
 
-func TestIsTelephoneOfChina(t *testing.T) {
+func Test_IsTelephoneOfChina(t *testing.T) {
 	grids := []struct {
 		telephone string
 		expected  bool
@@ -131,7 +131,7 @@ func TestIsTelephoneOfChina(t *testing.T) {
 	}
 }
 
-func TestIsEmail(t *testing.T) {
+func Test_IsEmail(t *testing.T) {
 	grids := []struct {
 		email    string
 		expected bool
@@ -189,7 +189,7 @@ func TestIsEmail(t *testing.T) {
 	}
 }
 
-func TestIsInternalIPv4(t *testing.T) {
+func Test_IsInternalIPv4(t *testing.T) {
 	grids := []struct {
 		ip       string
 		expected bool
@@ -235,5 +235,58 @@ func TestIsInternalIPv4(t *testing.T) {
 	for _, grid := range grids {
 		actual := IsInternalIPv4(grid.ip)
 		assert.Equal(t, grid.expected, actual)
+	}
+}
+
+func Test_IsWebDomain(t *testing.T) {
+	grids := []struct {
+		domain   string
+		expected bool
+	}{
+		{
+			domain:   "https://baidu.com",
+			expected: true,
+		},
+		{
+			domain:   "https://www.baidu.com",
+			expected: true,
+		},
+		{
+			domain:   `http://baidu.com:80`,
+			expected: true,
+		},
+		{
+			domain:   "https://www.www.baidu.com",
+			expected: false,
+		},
+		{
+			domain:   "www.www.com",
+			expected: false,
+		},
+		{
+			domain:   "ww.baidu.com",
+			expected: false,
+		},
+		{
+			domain:   "192.168.0.1",
+			expected: true,
+		},
+		{
+			domain:   "http:192.168.0.1",
+			expected: false,
+		},
+		{
+			domain:   "http://192.168.0.1",
+			expected: true,
+		},
+		{
+			domain:   "https://192.168.0.1:8092",
+			expected: true,
+		},
+	}
+
+	for _, grid := range grids {
+		actual := IsWebDomain(grid.domain)
+		assert.Equal(t, grid.expected, actual, "domain: %s", grid.domain)
 	}
 }

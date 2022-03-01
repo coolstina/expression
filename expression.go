@@ -19,34 +19,40 @@ import (
 )
 
 var (
-	ipv4         = regexp.MustCompile(`^\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}$`)
-	internalIPv4 = regexp.MustCompile(`(^127\.)|(^10\.)|(^172\.(1[6-9]|2[0-9]|3[0-1])\.)|(^192\.168\.)`)
-	cellphone    = regexp.MustCompile(`^(\+86(-|\s)?)?1[3-9][0-9]{9}$`)
-	telephone    = regexp.MustCompile(`^(\d{3,4}-)?[1-9][0-9]{4,8}$`)
-	email        = regexp.MustCompile(`^[a-zA-Z0-9]{1,20}(([._\-])?[a-zA-Z0-9]{1,20})*@[a-z0-9]+(\.?[a-z]+)+$`)
+	RegularOfWebDomain    = regexp.MustCompile(`^(http://|https://)?(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}|(www.)?[^www.][a-z]+\.[a-z]+)(:\d+)?$`)
+	RegularOfIPv4         = regexp.MustCompile(`^\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}$`)
+	RegularOfInternalIPv4 = regexp.MustCompile(`(^127\.)|(^10\.)|(^172\.(1[6-9]|2[0-9]|3[0-1])\.)|(^192\.168\.)`)
+	RegularOfCellphone    = regexp.MustCompile(`^(\+86(-|\s)?)?1[3-9][0-9]{9}$`)
+	RegularOfTelephone    = regexp.MustCompile(`^(\d{3,4}-)?[1-9][0-9]{4,8}$`)
+	RegularOfEmail        = regexp.MustCompile(`^[a-zA-Z0-9]{1,20}(([._\-])?[a-zA-Z0-9]{1,20})*@[a-z0-9]+(\.?[a-z]+)+$`)
 )
 
 // IsIPv4 regular expression is used to check whether the IP address is IPV4.
 func IsIPv4(str string) bool {
-	return ipv4.MatchString(str)
+	return RegularOfIPv4.MatchString(str)
 }
 
 // IsInternalIPv4 Use a regular expression to check whether the ip address is ipv4.
 func IsInternalIPv4(str string) bool {
-	return internalIPv4.MatchString(str)
+	return RegularOfInternalIPv4.MatchString(str)
 }
 
 // IsCellphoneOfChina regular expression is used to check whether the telephone number is china.
 func IsCellphoneOfChina(str string) bool {
-	return cellphone.MatchString(str)
+	return RegularOfCellphone.MatchString(str)
 }
 
 // IsTelephoneOfChina regular expression is used to check whether the telephone number is china.
 func IsTelephoneOfChina(str string) bool {
-	return telephone.MatchString(str)
+	return RegularOfTelephone.MatchString(str)
 }
 
 // IsEmail Use a regular expression to check whether the email address is valid.
 func IsEmail(str string) bool {
-	return email.MatchString(str)
+	return RegularOfEmail.MatchString(str)
+}
+
+// IsWebDomain Use a regular expression to check whether the web domain is valid.
+func IsWebDomain(str string) bool {
+	return RegularOfWebDomain.MatchString(str)
 }
