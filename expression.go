@@ -19,7 +19,7 @@ import (
 )
 
 var (
-	RegularOfWebDomain    = regexp.MustCompile(`^(http://|https://)?(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}|(www.)?[^www.][a-z]+\.[a-z]+)(:\d+)?$`)
+	RegularOfWebDomain    = regexp.MustCompile(`^(http://|https://)?(\d{1,3}(.\d{1,3}){3}|(www.)?[^www.][a-z]+\.[a-z]+)(:\d+)?$`)
 	RegularOfIPv4         = regexp.MustCompile(`^\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}$`)
 	RegularOfInternalIPv4 = regexp.MustCompile(`(^127\.)|(^10\.)|(^172\.(1[6-9]|2[0-9]|3[0-1])\.)|(^192\.168\.)`)
 	RegularOfCellphone    = regexp.MustCompile(`^(\+86(-|\s)?)?1[3-9][0-9]{9}$`)
