@@ -24,7 +24,7 @@ var (
 	RegularOfInternalIPv4 = regexp.MustCompile(`(^127\.)|(^10\.)|(^172\.(1[6-9]|2[0-9]|3[0-1])\.)|(^192\.168\.)`)
 	RegularOfCellphone    = regexp.MustCompile(`^(\+86(-|\s)?)?1[3-9][0-9]{9}$`)
 	RegularOfTelephone    = regexp.MustCompile(`^(\d{3,4}-)?[1-9][0-9]{4,8}$`)
-	RegularOfEmail        = regexp.MustCompile(`^[a-zA-Z0-9]{1,20}(([._\-])?[a-zA-Z0-9]{1,20})*@[a-z0-9]+(\.?[a-z]+)+$`)
+	RegularOfEmail        = regexp.MustCompile(`^[a-zA-Z0-9]{1,20}(([._\-])?[a-zA-Z0-9]{1,20})*@[a-z0-9]+(\.([a-z]+))+$`)
 )
 
 // IsIPv4 regular expression is used to check whether the IP address is IPV4.

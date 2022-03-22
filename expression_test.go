@@ -169,6 +169,18 @@ func Test_IsEmail(t *testing.T) {
 			expected: true,
 		},
 		{
+			email:    "123456@163.com",
+			expected: true,
+		},
+		{
+			email:    "123456@qq.com",
+			expected: true,
+		},
+		{
+			email:    "123456@com",
+			expected: false,
+		},
+		{
 			email:    "hello.@foxmail.com",
 			expected: false,
 		},
