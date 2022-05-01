@@ -56,3 +56,13 @@ func IsEmail(str string) bool {
 func IsWebDomain(str string) bool {
 	return RegularOfWebDomain.MatchString(str)
 }
+
+// IsTimeHourPoint matched time str is time hour point.
+func IsTimeHourPoint(str string) bool {
+	matched, err := regexp.MatchString(`[00-23]:[00-59]`, str)
+	if err != nil {
+		return false
+	}
+
+	return matched
+}
