@@ -309,6 +309,11 @@ func Test_IsTimeHourPoint(t *testing.T) {
 		expected bool
 	}{
 		{
+			timeStr:  "09:59",
+			expected: true,
+		},
+
+		{
 			timeStr:  "10:59",
 			expected: true,
 		},
@@ -332,10 +337,14 @@ func Test_IsTimeHourPoint(t *testing.T) {
 			timeStr:  "10:60",
 			expected: false,
 		},
+		{
+			timeStr:  "02:60",
+			expected: false,
+		},
 	}
 
 	for _, grid := range grids {
 		actual := IsTimeHourPoint(grid.timeStr)
-		assert.Equal(t, grid.expected, actual, "domain: %s", grid.timeStr)
+		assert.Equal(t, grid.expected, actual, "timeStr: %s", grid.timeStr)
 	}
 }

@@ -15,7 +15,9 @@
 package expression
 
 import (
+	"fmt"
 	"regexp"
+	"time"
 )
 
 var (
@@ -58,11 +60,22 @@ func IsWebDomain(str string) bool {
 }
 
 // IsTimeHourPoint matched time str is time hour point.
+// str similar 00:01/05:28/19:25/23:59
 func IsTimeHourPoint(str string) bool {
-	matched, err := regexp.MatchString(`[00-23]:[00-59]`, str)
-	if err != nil {
+	var daytime = func(value string) *time.Time {
+		parsed, err := time.Parse("2006-01-02 15:04:05", value)
+		if err != nil {
+			return nil
+		}
+
+		return &parsed
+	}
+
+	today := time.Now().Format("2006-01-02")
+	parsed := daytime(fmt.Sprintf("%s %s:00", today, str))
+	if parsed == nil {
 		return false
 	}
 
-	return matched
+	return true
 }
