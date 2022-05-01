@@ -302,3 +302,40 @@ func Test_IsWebDomain(t *testing.T) {
 		assert.Equal(t, grid.expected, actual, "domain: %s", grid.domain)
 	}
 }
+
+func Test_IsTimeHourPoint(t *testing.T) {
+	grids := []struct {
+		timeStr  string
+		expected bool
+	}{
+		{
+			timeStr:  "10:59",
+			expected: true,
+		},
+		{
+			timeStr:  "00:01",
+			expected: true,
+		},
+		{
+			timeStr:  "23:59",
+			expected: true,
+		},
+		{
+			timeStr:  "00:00",
+			expected: true,
+		},
+		{
+			timeStr:  "24:01",
+			expected: false,
+		},
+		{
+			timeStr:  "10:60",
+			expected: false,
+		},
+	}
+
+	for _, grid := range grids {
+		actual := IsTimeHourPoint(grid.timeStr)
+		assert.Equal(t, grid.expected, actual, "domain: %s", grid.timeStr)
+	}
+}
